@@ -1,0 +1,44 @@
+class Solution {
+    public int robotSim(int[] commands, int[][] obstacles) {
+        int dir[][] = {{0,1}, {1,0}, {0,-1}, {-1,0}};
+        int currPos[] = {0,0};
+        int dis = 0;
+        int currDir = 0;
+
+        HashMap<Integer, HashSet<Integer>> obsMap = new HashMap<>();
+        for(int obs[] : obstacles){
+            if(!obsMap.containsKey(obs[0])){
+                obsMap.put(obs[0], new HashSet<>());
+            }
+            obsMap.get(obs[0]).add(obs[1]);
+        }
+
+        for(int command : commands){
+            if(command == -1){
+                currDir = (currDir + 1) % 4;
+                continue;
+            }
+            if(command == -2){
+                currDir = currDir-1;
+                if(currDir == -1){
+                    currDir = 3;
+                }
+                continue;
+            }
+            else{
+                int direction[] = dir[currDir];
+                for(int steps = 0; steps < command; steps++){
+                    int xAxis = currPos[0] + direction[0];
+                    int yAxis = currPos[1] + direction[1];
+                    if(obsMap.containsKey(xAxis) && obsMap.get(xAxis).contains(yAxis)){
+                        break;
+                    }
+                    currPos[0] = xAxis;
+                    currPos[1] = yAxis;
+                }
+            }
+            dis = Math.max(dis, currPos[0]*currPos[0] + currPos[1]*currPos[1]);
+        }
+        return dis;
+    }
+}
