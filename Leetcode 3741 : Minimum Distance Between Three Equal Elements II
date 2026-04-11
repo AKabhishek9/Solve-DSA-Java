@@ -1,0 +1,34 @@
+class Solution {
+    public int minimumDistance(int[] nums) {
+        int minDist = Integer.MAX_VALUE;
+        HashMap<Integer, List<Integer>> hp = new HashMap<>();
+
+        for(int k = 0; k < nums.length; k++){
+            if(!hp.containsKey(nums[k])){
+                hp.put(nums[k], new ArrayList<>());
+            }
+            hp.get(nums[k]).add(k);
+        }
+        for(int key : hp.keySet()){
+            List<Integer> list = hp.get(key);
+
+            if(list.size() < 3){ 
+                continue;
+                }
+
+            for(int i = 0; i <= list.size() - 3; i++){
+                int first = list.get(i);
+                int third = list.get(i + 2);
+
+                int dist = 2 * (third - first);   //formula
+                minDist = Math.min(minDist, dist);
+            }
+        }
+
+        if(minDist == Integer.MAX_VALUE){
+            return -1;
+        }
+        return minDist;
+
+    }
+}
