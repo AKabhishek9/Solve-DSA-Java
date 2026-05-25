@@ -24,3 +24,27 @@ class Solution {
         return false;
     }
 }
+
+// Approach 2--------------------------------------------------------------
+class Solution {
+    public boolean check(int[] nums) {
+        int n = nums.length;
+        
+        int sortedArr[] = nums.clone();
+        Arrays.sort(sortedArr);
+
+        for(int i = 0; i < n; i++){
+            Boolean isSorted = true;
+            for(int j = 0; j < n; j++){
+                if(sortedArr[j] != nums[(j+i)%n]){
+                    isSorted = false;
+                    break;
+                }
+            }
+            if(isSorted == true){
+                return true;
+            }
+        }
+        return false;
+    }
+}   
