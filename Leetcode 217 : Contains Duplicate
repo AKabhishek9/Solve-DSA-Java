@@ -10,7 +10,7 @@ class Solution {
         return false;
     }
 }
-// Approach 2 ----------------------------------
+// Approach 2 ----------------------------------(BEST APPROACH)
 class Solution {
     public boolean containsDuplicate(int nums[]) {
         HashMap<Integer, Integer> map = new HashMap();
