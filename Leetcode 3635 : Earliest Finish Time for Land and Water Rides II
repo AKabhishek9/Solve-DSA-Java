@@ -1,0 +1,28 @@
+class Solution {
+
+    public int landFirst(int[] activity1, int[] activity1Duration,int[] activity2, int[] activity2Duration) {
+
+        int comp1 = Integer.MAX_VALUE;
+        int comp2 = Integer.MAX_VALUE;
+
+        for(int i = 0; i < activity1.length; i++) {
+            comp1 = Math.min(comp1, activity1[i] + activity1Duration[i]);
+        }
+
+        for(int i = 0; i < activity2.length; i++) {
+            comp2 = Math.min(comp2, Math.max(comp1, activity2[i]) + activity2Duration[i]);
+        }
+        return comp2;
+    }
+
+    public int earliestFinishTime(int[] landStartTime, int[] landDuration, int[] waterStartTime, int[] waterDuration) {
+
+        int method1 = landFirst(landStartTime, landDuration, waterStartTime, waterDuration);
+
+        int method2 = landFirst(waterStartTime, waterDuration, landStartTime, landDuration);
+
+        int res = Math.min(method1, method2);
+
+        return res;
+    }
+}
