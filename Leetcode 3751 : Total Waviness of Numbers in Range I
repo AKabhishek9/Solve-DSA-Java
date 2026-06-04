@@ -1,0 +1,20 @@
+class Solution {
+    public int count(int num){
+        String str = Integer.toString(num);
+        int cnt = 0;
+        for(int i = 1; i < str.length()-1; i++){
+            if(str.charAt(i) > str.charAt(i-1) && str.charAt(i) > str.charAt(i+1) 
+            || str.charAt(i) < str.charAt(i-1) && str.charAt(i) < str.charAt(i+1)){
+                cnt++;
+            }
+        }
+        return cnt;
+    }
+    public int totalWaviness(int num1, int num2) {
+        int ans = 0;
+        for(int i = num1; i <= num2; i++){
+            ans += count(i); 
+        }
+        return ans;
+    }
+}
