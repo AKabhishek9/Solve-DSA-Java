@@ -1,0 +1,57 @@
+// Approach 1
+class Solution {
+    public ListNode oddEvenList(ListNode head) {
+        if(head == null){
+            return null;
+        }
+        ArrayList<Integer> arr = new ArrayList<>();
+        ListNode temp = head;
+        while(temp!=null && temp.next!=null){          
+            arr.add(temp.val);
+            temp = temp.next.next;
+        }
+        if(temp!=null){
+            arr.add(temp.val);
+        }
+
+        temp = head.next;
+        while(temp!=null && temp.next!=null){          
+            arr.add(temp.val);
+            temp = temp.next.next;
+        }
+        if(temp!=null){
+            arr.add(temp.val);
+        }
+
+        temp = head;
+        int i = 0;
+        while(temp!=null){
+            temp.val = arr.get(i);
+            temp = temp.next;
+            i++;
+        }
+        return head;
+    }
+}
+
+// Approach 2
+class Solution {
+    public ListNode oddEvenList(ListNode head) {
+        if(head == null){
+            return null;
+        }
+        ListNode even = head.next;
+        ListNode odd = head;
+        ListNode evenStart = even;
+
+        while(even!=null && even.next!=null){
+            odd.next = even.next;
+            odd = odd.next;
+
+            even.next = odd.next;
+            even = even.next;
+        }
+        odd.next = evenStart;
+        return head;
+    }
+}

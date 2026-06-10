@@ -1,0 +1,11 @@
+class Solution {
+    public int numberOfSpecialChars(String word) {
+        int max = 0;
+        for(char c = 'a'; c <= 'z'; c++){
+            if(word.indexOf(c) != -1 && word.indexOf(Character.toUpperCase(c)) != -1){
+                max++;
+            }
+        }
+        return max;
+    }
+}

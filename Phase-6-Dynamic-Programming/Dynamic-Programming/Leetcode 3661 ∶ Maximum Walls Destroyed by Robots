@@ -1,0 +1,81 @@
+class Solution {
+    public int maxWalls(int[] robots, int[] distance, int[] walls) {
+        int n = robots.length;
+        Integer idx[] = new Integer[n];
+        for (int i = 0; i < n; i++) idx[i] = i;
+        Arrays.sort(idx, (a, b) -> robots[a] - robots[b]);
+
+        int r[] = new int[n];
+        int d[] = new int[n];
+        for (int i = 0; i < n; i++) {
+            r[i] = robots[idx[i]];
+            d[i] = distance[idx[i]];
+        }
+
+        Arrays.sort(walls);
+        long dp[] = new long[2];
+        dp[0] = wallsInRange(walls, r[0] - d[0], r[0]); // fires left
+        dp[1] = 0;                                        // fires right 
+
+        for (int i = 1; i < n; i++) {
+            // block by right robo
+            int liLo = Math.max(r[i] - d[i], r[i-1] + 1);
+            int liHi = r[i];
+            int li = wallsInRange(walls, liLo, liHi);
+
+            // block by left robo
+            int riLo = r[i-1];
+            int riHi = Math.min(r[i-1] + d[i-1], r[i] - 1);
+            int ri = wallsInRange(walls, riLo, riHi);
+
+            int overlapLo = Math.max(liLo, riLo);
+            int overlapHi = Math.min(liHi, riHi);
+            int overlap = wallsInRange(walls, overlapLo, overlapHi);
+            int union = li + ri - overlap;
+
+            long newL = Math.max(dp[0] + li, dp[1] + union);
+            long newR = Math.max(dp[0], dp[1] + ri); 
+
+            dp[0] = newL;
+            dp[1] = newR;
+        }
+
+        int rightRange = wallsInRange(walls, r[n-1], r[n-1] + d[n-1]);
+        return (int) Math.max(dp[0], dp[1] + rightRange);
+    }
+
+    private int wallsInRange(int[] walls, int lo, int hi) {
+        if (lo > hi){
+            return 0;
+            }
+        return upperBound(walls, hi) - lowerBound(walls, lo);
+    }
+
+    private int lowerBound(int[] arr, int val) {
+        int lo = 0, hi = arr.length;
+        while (lo < hi) {
+            int mid = (lo + hi) / 2;
+            if (arr[mid] < val) {
+                lo = mid + 1;
+            }
+            else {
+                hi = mid;
+            }
+        }
+        return lo;
+    }
+
+    private int upperBound(int[] arr, int val) {
+        int lo = 0, hi = arr.length;
+        while (lo < hi) {
+            int mid = (lo + hi) / 2;
+            if (arr[mid] <= val){
+                lo = mid + 1;
+            }
+            else {
+                hi = mid;
+            }
+        }
+        return lo;
+    }
+}

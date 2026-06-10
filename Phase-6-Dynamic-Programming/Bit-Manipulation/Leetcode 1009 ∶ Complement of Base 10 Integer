@@ -1,0 +1,15 @@
+class Solution {
+    public int bitwiseComplement(int n) {
+        String binaryStr = Integer.toBinaryString(n);
+        StringBuilder ans = new StringBuilder();
+
+        for(int i = 0; i<binaryStr.length(); i++){
+            if(binaryStr.charAt(i) == '0'){
+                ans.append(1);
+            }else{
+                ans.append(0);
+            }
+        }
+        return Integer.parseInt(ans.toString(), 2);
+    }
+}

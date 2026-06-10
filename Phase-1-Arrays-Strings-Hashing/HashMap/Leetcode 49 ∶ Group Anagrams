@@ -1,0 +1,42 @@
+// Approach 1 ---------------------------------------(BEST METHOD)
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        HashMap<String, List<String>> map = new HashMap<>();
+        for(int i = 0; i < strs.length; i++){
+            char c[] = strs[i].toCharArray();
+            Arrays.sort(c);
+            String key = new String(c);
+
+            if(!map.containsKey(key)){
+                map.put(key, new ArrayList<>());
+            }
+            map.get(key).add(strs[i]);
+        }
+        return new ArrayList<>(map.values());
+    }
+}
+
+// Approach 2 -------------------------------------------------
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        HashMap<String, List<String>> map = new HashMap<>();
+        for(int i = 0;i < strs.length; i++){
+            int frq[] = new int[26];
+            for(int j = 0; j < strs[i].length(); j++){
+                char c = strs[i].charAt(j);
+                frq[c - 'a']++;
+            }
+            StringBuilder key = new StringBuilder();
+            for(int count : frq) {
+                key.append("#").append(count);
+            }
+
+            String strKey = key.toString();
+            if(!map.containsKey(strKey)){
+                map.put(strKey, new ArrayList<>());
+            }
+            map.get(strKey).add(strs[i]);
+        }
+        return new ArrayList<>(map.values());
+    }
+}
