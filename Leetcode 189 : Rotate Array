@@ -1,0 +1,38 @@
+// Approach 1 -------------------------------------(TC = 1ms)
+class Solution {
+    public void rotate(int nums[], int k) {
+        int n = nums.length;
+        k = k % n;
+        int temp[] = new int[k];
+
+        for(int i = n-k; i < n; i++){
+            temp[i] = nums[i];
+        }
+        for(int i = n-k-1; i >= 0; i--){
+            nums[n-k-1] = nums[i];
+        }
+        int j = 0;
+        for(int i = 0; i < k; i++){
+            nums[i] = temp[j++];
+        }
+    }
+}
+
+// Approach 2 ---------------------------------------(BEST TC = 0ms)
+class Solution {
+    private void rev(int nums[], int start, int end){
+        while(start<end){
+            int temp = nums[start];
+            nums[start] = nums[end];
+            nums[end] = temp;
+            start++;
+            end--;
+        }
+    }
+    public void rotate(int nums[], int k) {
+        k = k % nums.length;
+        rev(nums, 0, nums.length-1);
+        rev(nums, 0, k-1);
+        rev(nums, k, nums.length-1);
+    }
+}
