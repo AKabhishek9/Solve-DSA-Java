@@ -1,4 +1,4 @@
-// Approach 1 -------------------------------------(TC = 1ms)
+// Approach 1 ------------------------------------- (TC = 1ms)
 class Solution {
     public void rotate(int nums[], int k) {
         int n = nums.length;
@@ -18,7 +18,7 @@ class Solution {
     }
 }
 
-// Approach 2 ---------------------------------------(BEST TC = 0ms)
+// Approach 2 --------------------------------------- (BEST TC = 0ms)
 class Solution {
     private void rev(int nums[], int start, int end){
         while(start<end){
