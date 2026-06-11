@@ -1,0 +1,19 @@
+class Solution {
+    public boolean isPalindrome(String s) {
+        String words = s.replaceAll("[^a-zA-Z0-9]", "");
+        StringBuilder result = new StringBuilder(words.toLowerCase());
+        if(result.length() == 0){
+            return true;
+        }
+        int leftPtr = 0;
+        int rightPtr = result.length() - 1;
+        while(rightPtr > leftPtr){
+            if(result.charAt(leftPtr) != result.charAt(rightPtr)){
+                return false;
+            }
+            leftPtr++;
+            rightPtr--;
+        }
+        return true;
+    }
+}
