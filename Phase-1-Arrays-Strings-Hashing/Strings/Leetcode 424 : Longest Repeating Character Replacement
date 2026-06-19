@@ -19,3 +19,5 @@ class Solution {
         return str;
     }
 }
+
+// Approach 2 ---------// https://github.com/AKabhishek9/Solve-DSA-Java/blob/main/Phase-2-Two-Pointers-Sliding-Window/Two-Pointers/Leetcode%20424%20%3A%20Longest%20Repeating%20Character%20Replacement
