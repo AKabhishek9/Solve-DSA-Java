@@ -1,3 +1,4 @@
+// Approach 1 -------------------------------------------------(TC = 1ms)
 class Solution {
     public int trap(int[] height) {
         int leftPtr = 0;
@@ -22,5 +23,30 @@ class Solution {
             }
         }
         return cnt;
+    }
+}
+
+// Approach 2 ------------------------------------------------(BEST TC = 0ms)
+class Solution {
+    public int trap(int[] height) {
+        int left = 0;
+        int right = height.length-1;
+        int leftMax = height[left];
+        int rightMax = height[right];
+        int totalWater = 0;
+
+        while(left < right){
+            if(leftMax < rightMax){
+                left++;
+                leftMax = Math.max(leftMax, height[left]);
+                totalWater += leftMax-height[left];
+            }
+            else{
+                right--;
+                rightMax = Math.max(rightMax, height[right]);
+                totalWater += rightMax-height[right];
+            }
+        }
+        return totalWater;
     }
 }
