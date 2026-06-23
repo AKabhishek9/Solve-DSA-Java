@@ -37,3 +37,50 @@ class Solution {
         return s.substring(st, st+minLen);
     }
 }
+
+// Approach 2 -------------------------------------(BEST TC = 4ms)
+class Solution {
+    public String minWindow(String s, String t) {
+        int left = 0;
+        int right = 0;
+        int freq[] = new int[128];
+        int st = -1;
+        int minLen = Integer.MAX_VALUE;
+        int cnt = 0;
+
+        // Insert all the char of 't' in freq. 
+        for(int i = 0; i < t.length(); i++){
+            freq[t.charAt(i)]++;
+        }
+        while(right < s.length()){
+            // Checks char. of 's' already present in freq.
+            if(freq[s.charAt(right)] > 0){
+                cnt++;
+            }
+            // After increasing cnt remove from the freq.
+            freq[s.charAt(right)]--;
+            
+            // checks window is valid
+            while(cnt == t.length()){
+                //Shrink the window
+                if(right - left + 1 < minLen){
+                    minLen = right-left+1;
+                    st = left;
+                }
+                // Remove left char. form window
+                freq[s.charAt(left)]++;
+
+                // Window is invalid
+                if(freq[s.charAt(left)] > 0){
+                    cnt--;
+                }
+                left++;
+            }
+            right++;
+        }
+        if(st == -1){
+            return "";
+        }
+        return s.substring(st, st + minLen);
+    }
+}
