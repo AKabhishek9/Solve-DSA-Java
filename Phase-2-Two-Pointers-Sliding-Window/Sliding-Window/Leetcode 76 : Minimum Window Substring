@@ -1,0 +1,39 @@
+// Approach 1(Brute Force) ----------------------------------------------(Gives TLE)
+class Solution {
+    public String minWindow(String s, String t) {
+        int st = 0;
+        int minLen = Integer.MAX_VALUE;
+        for(int i = 0; i < s.length(); i++){
+            int freq[] = new int[256];
+            int cnt = 0;
+            
+            // Add all the char and their freq. of string 't'
+            for(int j = 0; j < t.length(); j++){
+                freq[t.charAt(j)]++;
+            }
+
+            for(int j = i; j < s.length(); j++){
+                // Check char. is present, if present increase cnt
+                if(freq[s.charAt(j)] > 0){
+
+                    cnt++;
+                }
+                // Decrease freq. of char everytime
+                freq[s.charAt(j)]--;
+
+                if(cnt == t.length()){
+                    // Adjust the window size
+                    if(j-i+1 < minLen){
+                        minLen = j-i+1;
+                        st = i;
+                        break;
+                    }
+                }
+            }
+            if(minLen == Integer.MAX_VALUE){
+                return "";
+            }
+        }
+        return s.substring(st, st+minLen);
+    }
+}
