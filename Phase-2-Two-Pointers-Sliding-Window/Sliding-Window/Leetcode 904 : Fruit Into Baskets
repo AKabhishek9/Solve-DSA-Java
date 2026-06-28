@@ -1,0 +1,28 @@
+class Solution {
+    public int totalFruit(int[] fruits) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int left = 0;
+        int right = 0;
+        int cnt = 0;
+
+        while(right < fruits.length){
+            //Add fruit to map or increase freq. 
+            map.put(fruits[right], map.getOrDefault(fruits[right], 0) + 1);
+            
+            if(map.size() > 2){
+                // If map size increase more than 2 remove left fruit from the window
+                // first reduce freq.
+                map.put(fruits[left], map.get(fruits[left]) - 1);
+                // after that when freq = 0 remove fruit
+                if(map.get(fruits[left]) == 0){
+                    map.remove(fruits[left]);
+                }
+                left++;
+            }
+            // maintain max fruit count
+            cnt = Math.max(cnt, right-left+1);
+            right++;
+        }
+        return cnt;
+    }
+}
