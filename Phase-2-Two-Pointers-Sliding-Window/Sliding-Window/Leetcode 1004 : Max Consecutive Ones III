@@ -49,6 +49,18 @@ class Solution {
                 left++;
             }
             right++;
+            /*
+            we can also use if instead of while
+            if(zero > k){
+                // if zero increases more then k increase left pointer 
+                // and if there is an zero on left pointer reduce count of zero 
+                if(nums[left] == 0){
+                    zero--;
+                }
+                left++;
+            }
+            right++;
+            */
         }
         return maxConse;
     }
