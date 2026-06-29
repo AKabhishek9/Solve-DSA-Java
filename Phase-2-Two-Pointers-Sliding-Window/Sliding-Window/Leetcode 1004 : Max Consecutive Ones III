@@ -1,0 +1,24 @@
+class Solution {
+    public int longestOnes(int[] nums, int k) {
+        int len = 0;
+        int maxConse = 0;
+        for(int i = 0; i < nums.length; i++){
+            int zero = 0;
+            for(int j = i; j < nums.length; j++){
+                if(nums[j] == 0){
+                    zero++;
+                }
+                // check that window contains only k zeros
+                if(zero <= k){
+                    len = j-i+1;
+                    maxConse = Math.max(maxConse, len);
+                }
+                // if zeros are more then k
+                else{
+                    break;
+                }
+            }
+        }
+        return maxConse;
+    }
+}
