@@ -1,0 +1,13 @@
+class Solution {
+    public int numOfStrings(String[] patterns, String word) {
+        int cnt = 0;
+        for(int i = 0; i < patterns.length; i++){
+            //Checks patterns[i] is present on which index of word
+            // if word contains patterns then increase cnt
+            if(word.contains(patterns[i])){
+                cnt++;
+            }
+        }
+        return cnt;
+    }
+}
