@@ -1,0 +1,44 @@
+// Approach 1 (Brute Force) -----------------------------------------(Gives TLE)
+class Solution {
+    public int numberOfSubstrings(String s) {
+        int cnt = 0;
+        for(int i = 0; i < s.length(); i++){
+            int freq[] = new int[3];
+            for(int j = i; j < s.length(); j++){
+                // mark a, b, c = 1
+                freq[s.charAt(j) - 'a'] = 1;
+                // check current window contains all three char a, b, c
+                if(freq[0] > 0 && freq[1] > 0 && freq[2] > 0){
+                    cnt += s.length() - j;
+                    break;
+                }
+            }
+        }
+        return cnt;
+    }
+}
+
+// Approach 2 --------------------------------------------------------(TC = 18ms)
+class Solution {
+    public int numberOfSubstrings(String s) {
+        int cnt = 0;
+        int left = 0;
+        int right = 0;
+        int freq[] = new int[3];
+
+        while(right < s.length()){
+            // add freq of a, b, c
+            freq[s.charAt(right) - 'a']++;
+            while(freq[0] > 0 && freq[1] > 0 && freq[2] > 0){
+                //update cnt for every valid window
+                //if vaild window found means all remaining char. are also valid so, add them to cnt
+                cnt += s.length()-right;
+                // move left pointer until all three char. > 0 after reduceing the freq.
+                freq[s.charAt(left) - 'a']--;
+                left++;
+            }
+            right++;
+        }
+        return cnt;
+    }
+}
