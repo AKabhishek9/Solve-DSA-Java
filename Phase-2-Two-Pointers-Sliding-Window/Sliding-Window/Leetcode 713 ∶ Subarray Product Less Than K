@@ -20,3 +20,31 @@ class Solution {
         return cnt;
     }
 }
+
+// Approach 2 ---------------------------------------------------------(BEST TC = 4ms)
+class Solution {
+    public int numSubarrayProductLessThanK(int[] nums, int k) {
+        int cnt = 0;
+        int left = 0;
+        int right = 0;
+        int prod = 1;
+
+        if(k <= 1){
+            return 0;
+        }        
+        while(right < nums.length){
+            //find product till current index
+            prod *= nums[right];
+            //if product < k, reduce the size window
+            while(prod >= k){
+                // divide until prod. > k and increment left pointer
+                prod /= nums[left];
+                left++;
+            }
+            // increase cnt if window is valid
+            cnt += right-left+1;
+            right++;
+        }
+        return cnt;
+    }
+}
