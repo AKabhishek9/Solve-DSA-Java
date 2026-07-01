@@ -1,4 +1,4 @@
-Approach 1 (Brute Force) ----------------------------------------(Gives TLE)
+Approach 1 (Brute Force) ----------------------------------------(WORST TC = 850ms)
 class Solution {
     public int numSubarrayProductLessThanK(int[] nums, int k) {
         int cnt = 0;
