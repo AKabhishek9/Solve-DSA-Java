@@ -1,0 +1,26 @@
+// Approach 1 (Brute Force)----------------------------------------(WORST TC = 358ms)
+class Solution {
+    public List<Integer> findAnagrams(String s, String p) {
+        List<Integer> list = new ArrayList<>();
+        int freqP[] = new int[26];
+
+        // add freq. of char 'p' in array
+        for(int i = 0; i < p.length(); i++){
+            freqP[p.charAt(i) - 'a']++;
+        }
+
+        for(int i = 0; i <= s.length()-p.length(); i++){
+            int freqS[] = new int[26];
+            for(int j = i; j < i+p.length(); j++){
+                //add freq. of char in 's' for the current window
+                freqS[s.charAt(j) - 'a']++;
+            }
+            // check both freq. are equal 
+            if(Arrays.equals(freqS, freqP)){
+                // add index no. in list
+                list.add(i);
+            }
+        }
+        return list;
+    }
+}
