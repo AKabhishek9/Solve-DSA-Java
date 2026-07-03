@@ -1,3 +1,4 @@
+// Approach 1(Brute force)---------------------------------------------------(TC = 0ms)
 class Solution {
     public int searchInsert(int[] nums, int target) {
         for(int i = 0; i < nums.length; i++){
@@ -11,5 +12,32 @@ class Solution {
         //if no greater element is found in the nums
         // means it lies outside the nums so return last index 
         return nums.length;
+    }
+}
+
+// Approach 2 -----------------------------------------------------------------(BEST TC = 0ms)
+class Solution {
+    public int searchInsert(int[] nums, int target) {
+        int start = 0;
+        int end = nums.length-1;
+        while(start <= end){
+            // find mid for every half of nums
+            int mid = start + (end - start)/2;
+            // if target found return mid index
+            if(nums[mid] == target){
+                return mid;
+            }
+            // target < mid index value means it can be in left half
+            else if(nums[mid] > target){
+                end = mid-1;
+            }
+            // target > mid means the value is in right half
+            else{
+                start = mid+1;
+            }
+        }
+        // after doing all above operations 
+        // if target is not found means it should be on start index
+        return start;
     }
 }
