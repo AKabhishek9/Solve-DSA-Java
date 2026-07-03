@@ -1,0 +1,15 @@
+class Solution {
+    public int searchInsert(int[] nums, int target) {
+        for(int i = 0; i < nums.length; i++){
+            // if target if found simply return the current index
+            // if target is missing but lies just before current nums[i] value 
+            // means missing value can inserted on that i^th index
+            if(nums[i] >= target){
+                return i;
+            } 
+        }
+        //if no greater element is found in the nums
+        // means it lies outside the nums so return last index 
+        return nums.length;
+    }
+}
