@@ -1,0 +1,14 @@
+// Approach 1 (Brute Force) -----------------------------------------------(TC = 1ms)
+class Solution {
+    public int search(int[] nums, int target) {
+        for(int i = 0; i < nums.length; i++){
+            // checks every element that it is equals to target or not
+            if(nums[i] == target){
+                // if target element found in nums return current index
+                return i;
+            }
+        }
+        // if target element not found return -1
+        return -1;
+    }
+}
