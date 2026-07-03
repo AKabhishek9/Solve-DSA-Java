@@ -12,3 +12,30 @@ class Solution {
         return -1;
     }
 }
+
+// Approach 2 -----------------------------------------------------------(Binary Search TC = 0ms)
+class Solution {
+    public int search(int[] nums, int target) {
+        int start = 0;
+        int end = nums.length-1;
+
+        while(start <= end){
+            // find mid for every new window(start to end)
+            int mid = start + (end-start)/2;
+            // if mid of nums = target return index of mid
+            if(nums[mid] == target){
+                return mid;
+            }
+            // if mid > target shift end pointer to mid-1
+            else if(nums[mid] > target){
+                end = mid-1;
+            }
+            // if mid < target shift start pointer to mid+1
+            else{
+                start = mid+1;
+            }
+        }
+        // if mid != target in whole nums return -1
+        return -1;
+    }
+}
