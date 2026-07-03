@@ -31,22 +31,30 @@ class Solution {
     public int trap(int[] height) {
         int left = 0;
         int right = height.length-1;
+        int water = 0;
         int leftMax = height[left];
         int rightMax = height[right];
-        int totalWater = 0;
-
+        
         while(left < right){
+            // increase left pointer first if height of left side < right side
             if(leftMax < rightMax){
                 left++;
+                // store the max height of left side 
                 leftMax = Math.max(leftMax, height[left]);
-                totalWater += leftMax-height[left];
+                // if the height of next element in array is small than leftMax
+                // increase the water count
+                water += leftMax - height[left];
             }
             else{
+                // decrease right pointer if height of left side > right side
                 right--;
+                // store max height of right side
                 rightMax = Math.max(rightMax, height[right]);
-                totalWater += rightMax-height[right];
+                // if the height of current right pointer element is < rightMax
+                // increase water count
+                water += rightMax - height[right];
             }
         }
-        return totalWater;
+        return water;
     }
 }
