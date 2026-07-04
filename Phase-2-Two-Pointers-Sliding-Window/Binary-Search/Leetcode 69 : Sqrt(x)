@@ -16,3 +16,24 @@ class Solution {
         return ans;
     }
 }
+
+// Approach 2 --------------------------------------------------(BEST TC = 1ms)
+class Solution {
+    public int mySqrt(int x) {
+        int ans = 0;
+        int low = 0;
+        int high = x;
+        while(low <= high){
+            int mid = (low+high)/2;
+            // check every mid until <= x
+            if((long)mid*mid <= x){
+                ans = mid; // set mid value until equal or closer value find
+                low = mid+1; // discard left half
+            }
+            else{ // when mid*mid > x
+                high = mid-1; // discard right half 
+            }
+        }
+        return ans;
+    }
+}
