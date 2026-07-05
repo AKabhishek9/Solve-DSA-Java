@@ -1,0 +1,13 @@
+// Approach 1 (Brute Force) -----------------------------------------------(TC = 0ms)
+class Solution {
+    public int search(int[] nums, int target) {
+        int i = 0;
+        while(i < nums.length){
+            if(nums[i] == target){ // checks every no. until target is found
+                return i;
+            }
+            i++;
+        }
+        return -1;
+    }
+}
