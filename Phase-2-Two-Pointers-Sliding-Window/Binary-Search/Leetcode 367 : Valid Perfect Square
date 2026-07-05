@@ -1,0 +1,13 @@
+// Approach 1 ---------------------------------------------------------(WORST Gives TLE)
+class Solution {
+    public boolean isPerfectSquare(int num) {
+        int i = 1;
+        while(i <= num){
+            if((long)i*i == num){ // checks that it gives exact same vaule 
+                return true; // if found return true
+            }
+            i++;
+        }
+        return false;
+    }
+}
