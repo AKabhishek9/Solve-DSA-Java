@@ -11,3 +11,24 @@ class Solution {
         return false;
     }
 }
+
+// Approach 2 ------------------------------------------------(BEST TC = 0ms)
+class Solution {
+    public boolean isPerfectSquare(int num) {
+        int start = 0;
+        int end = num;
+        while(start <= end){
+            int mid = (start+end)/2;
+            if((long)mid*mid == num){ // checks that it gives exact same vaule 
+                return true; // if found return true
+            }
+            else if((long)mid*mid > num){ // search in left half
+                end = mid-1;
+            }
+            else{ // search in right half
+                start = mid+1;
+            }
+        }
+        return false;
+    }
+}
