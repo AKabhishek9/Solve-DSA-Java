@@ -1,0 +1,42 @@
+// Approach 1 (Brute Force) ----------------------------(TC = 0ms)
+class Solution {
+    public int findMin(int[] nums) {
+        int min = Integer.MAX_VALUE;
+        for(int i = 0; i < nums.length; i++){
+            // set min
+            min = Math.min(min, nums[i]);
+        }
+        return min;
+    }
+}
+
+// Approach 2 ------------------------------------------------(BEST TC = 0ms)
+class Solution {
+    public int findMin(int[] nums) {
+        int start = 0;
+        int end = nums.length-1;
+        int min = Integer.MAX_VALUE;
+        while(start <= end){
+            // Array is already sorted
+            if(nums[start] <= nums[end]){
+                min = Math.min(min, nums[start]);
+                break;
+            }
+            
+            int mid = (start+end)/2;
+            // left half is sorted
+            if(nums[mid] >= nums[start]){
+                // set starting value of left half in min
+                min = Math.min(min,nums[start]);
+                start = mid+1;
+            }
+            // right half if sorted
+            else{
+                // set starting value of right half in min
+                min = Math.min(min, nums[mid]);
+                end = mid-1;
+            }  
+        }
+        return min;
+    }
+}
