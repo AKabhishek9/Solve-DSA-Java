@@ -1,0 +1,42 @@
+class Solution {
+    public int findMin(int[] nums) {
+        int start = 0;
+        int end = nums.length-1;
+        int min = Integer.MAX_VALUE;
+        while(start <= end){
+
+            // Only one element left
+            if(start == end){
+                min = Math.min(min, nums[start]);
+                break;
+            }
+            int mid = (start+end)/2;
+            // 1. Handle duplicates first
+            if(nums[start] == nums[mid] && nums[mid] == nums[end]){
+                min = Math.min(min, nums[start]); // Save the duplicate value
+                start++;
+                end--;
+                continue;
+            }
+            // 2. Then check if the current range is sorted
+            if(nums[start] < nums[end]){
+                min = Math.min(min, nums[start]);
+                break;
+            
+            }
+            // if left side is sorted set min = nums[start] because this is starting value
+            if(nums[start] <= nums[mid]){
+                min = Math.min(min, nums[start]);
+                // move pointer to right half
+                start = mid+1;
+            }
+            // if right side is sorted set min = nums[mid] because this is starting value
+            else{  
+                min = Math.min(min, nums[mid]);
+                // move pointer to left half
+                end = mid-1;
+            }
+        }
+        return min;
+    }
+}
