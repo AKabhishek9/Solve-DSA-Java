@@ -1,0 +1,25 @@
+// Approach 1 (Brute Force) -----------------------------------------(Gives TLE)
+class Solution {
+    public int minEatingSpeed(int[] piles, int h) {
+        int ans = 0;
+        int maxSpeed = 0; 
+        // find the max speed at which she can eat
+        for(int i = 0; i < piles.length; i++){
+            maxSpeed = Math.max(maxSpeed, piles[i]);
+        }
+        // start from 1 banana per hour
+        for(int speed = 1; speed <= maxSpeed; speed++){
+            int time = 0;
+            // cal. time for each  speed 
+            for(int i = 0; i < piles.length; i++){
+                time += Math.ceil((double)piles[i]/speed);
+            }
+            // when time is less then or equal to given time
+            // return the speed means no. of banana per hour
+            if(time <= h){
+                return speed;
+            }
+        }
+        return -1;
+    }
+}
