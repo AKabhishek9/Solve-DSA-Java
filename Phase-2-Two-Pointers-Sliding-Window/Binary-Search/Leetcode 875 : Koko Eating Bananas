@@ -23,3 +23,37 @@ class Solution {
         return -1;
     }
 }
+
+// Approach 2 ------------------------------------------------------(TC = 28ms)
+class Solution {
+    public int minEatingSpeed(int[] piles, int h) {
+        int ans = 0;
+        int start = 1;
+        int end = 0;
+        //Find the max speed at which she can eat
+        for(int i = 0; i < piles.length; i++){
+            end = Math.max(end, piles[i]);
+        }
+        // Start binary search :
+        while(start <= end){
+            int mid = (start+end)/2;
+            int time = 0;
+            // find the total time to eat all the bananas for the current speed
+            for(int i = 0; i < piles.length; i++){
+                time += Math.ceil((double)piles[i]/mid);
+            }
+            // if this statement is true discard right side 
+            // and check min. time at which koko can eat all bananas
+            if(time <= h){
+                ans = mid; // set mid as req. time in which she can eat
+                end = mid-1;
+            }
+            // otherwise discard right side 
+            else{ 
+                // means more time req. to eat all banana
+                start = mid+1;
+            }
+        }
+        return ans;
+    }
+}
