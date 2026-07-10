@@ -1,0 +1,24 @@
+// Apprroach 1 (Brute Force) ------------------------------------(Gives TLE)
+class Solution {
+    public int smallestDivisor(int[] nums, int threshold) {
+        int maxDiv = Integer.MIN_VALUE;
+
+        // Find the maximum number
+        for(int i = 0; i < nums.length; i++){
+            maxDiv = Math.max(maxDiv, nums[i]);
+        }
+        // Try every possible divisor
+        for(int div = 1; div <= maxDiv; div++){
+            int ans = 0;
+            // Calculate the sum after division
+            for(int i = 0; i < nums.length; i++){
+                ans += Math.ceil((double)nums[i]/div);
+            }
+            // When smallest valid divisor found
+            if(ans <= threshold){
+                return div;
+            }
+        }
+        return -1;
+    }
+}
