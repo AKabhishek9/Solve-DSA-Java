@@ -33,3 +33,48 @@ class Solution {
         return -1;
     }
 }
+
+// Approach 2 ------------------------------------------------------------------------(TC = 10ms)
+class Solution {
+    public int shipWithinDays(int[] weights, int days) {
+        int maxWeight = 0;
+        int end = 0;
+        int ans = 0;
+
+        // find the search range 
+        for(int i = 0; i < weights.length; i++){
+            end += weights[i];
+            maxWeight = Math.max(maxWeight, weights[i]);
+        }
+        int start = maxWeight;
+
+        // start binary search
+        while(start <= end){
+            int mid = start + (end-start)/2;
+            int load = 0;
+            int cntDays = 1;
+
+            // find total days if the capacity is according to mid
+            for(int i = 0; i < weights.length; i++){
+                if(load + weights[i] <= mid){
+                    load += weights[i];
+                }
+                // if load > current capacity then load next day
+                else{
+                    cntDays++;
+                    load = weights[i];
+                }
+            }
+            // if capcity is more than try to find min. capacity
+            if(cntDays <= days){
+                ans = mid;
+                end = mid-1;
+            }
+            // find more capacity to ship in required days
+            else{
+                start = mid+1;
+            }
+        }
+        return ans;
+    }
+}
