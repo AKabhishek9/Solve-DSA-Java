@@ -1,0 +1,29 @@
+// Approach 1 (Brute Force) ---------------------------------------------(Gives TLE)
+class Solution {
+    public int[] arrayRankTransform(int[] arr) {
+        int sortedArr[] = arr.clone();
+        Arrays.sort(sortedArr);
+        int ans[] = new int[arr.length];
+
+        // find rank of each element
+        for(int i = 0; i < arr.length; i++){
+            int rank = 1;
+            for(int j = 0; j < arr.length; j++){
+                // untill current element is not found increase rank
+                //  increase rank first, then check match
+                if(j > 0 && sortedArr[j] != sortedArr[j-1]){
+                    rank++;
+                }
+                // if element matches 
+                if(sortedArr[j] == arr[i]){
+                    // add rank of current element
+                    ans[i] = rank;
+                    break;
+                }
+            }
+        }
+        return ans;
+    }
+}
+
+// Approach 2 ------------> 
