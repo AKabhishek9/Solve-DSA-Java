@@ -1,0 +1,25 @@
+// Approach 1 (Brute force) -------------------------> Phase-1-Arrays-Strings-Hashing/Arrays/Leetcode 1331 : Rank Transform of an Array
+
+// Approach 2 ------------------------------------------------(TC = 36ms)
+class Solution {
+    public int[] arrayRankTransform(int[] arr) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int sortedArr[] = arr.clone();
+        Arrays.sort(sortedArr);
+
+        int rank = 1;
+        for(int i = 0; i < sortedArr.length; i++){
+            // Store rank for each unique element
+            if(!map.containsKey(sortedArr[i])){
+                map.put(sortedArr[i], rank);
+                rank++;
+            }
+        }
+
+        // Replace each element with its rank
+        for(int i = 0; i < arr.length; i++){
+            arr[i] = map.get(arr[i]);
+        }
+        return arr;
+    }
+}
