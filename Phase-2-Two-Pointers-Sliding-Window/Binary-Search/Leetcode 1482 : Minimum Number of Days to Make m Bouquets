@@ -1,0 +1,108 @@
+// Approach 1 (Brute force) ------------------------------------------------------(Gives TLE)
+class Solution {
+    public boolean bloom(int arr[], int day, int m, int k){
+        int cnt = 0;
+        int b = 0;
+        // check that flower is bloom
+        for(int i = 0; i < arr.length; i++){
+            // if flower is bloom increase cnt until adjacent flowers is bloom
+            if(arr[i] <= day){
+                cnt++;
+            }
+            // if adjacent flowers is not bloom 
+            else{
+                b += cnt/k;
+                cnt = 0;
+            }
+        }
+        // also check last cnt 
+        b += cnt/k;
+
+        // check that req. bouquets is possible
+        if(b < m){
+            return false;
+        }
+        return true;
+    }
+
+    public int minDays(int[] bloomDay, int m, int k) {
+        // check that req. bouquets is possible according to length of bloomDay
+        if(m*k > bloomDay.length){
+            return -1;
+        }
+        int minRange = Integer.MAX_VALUE;
+        int maxRange = Integer.MIN_VALUE;
+
+        // find the range
+        for(int i = 0; i < bloomDay.length; i++){
+            minRange = Math.min(minRange, bloomDay[i]);
+            maxRange = Math.max(maxRange, bloomDay[i]);
+        }
+
+        // try every possible day in the range
+        for(int day = minRange; day <= maxRange; day++){
+            if(bloom(bloomDay, day, m, k)){
+                return day;
+            }
+        }
+        return -1;
+    }
+}
+
+// Approach 2 --------------------------------------------------------(TC = 17ms)
+class Solution {
+    public boolean bloom(int arr[], int day, int m, int k){
+        int cnt = 0;
+        int b = 0;
+        // check that flower is bloom
+        for(int i = 0; i < arr.length; i++){
+            // if flower is bloom increase cnt until adjacent flowers is bloom
+            if(arr[i] <= day){
+                cnt++;
+            }
+            // if adjacent flowers is not bloom 
+            // find total bouquets is found and reset cnt
+            else{
+                b += cnt/k;
+                cnt = 0;
+            }
+        }
+        // also add last found possible bouquets
+        b += cnt/k;
+
+        // check that req. bouquets is possible
+        if(b < m){
+            return false;
+        }
+        return true;
+    }
+    public int minDays(int[] bloomDay, int m, int k) {
+        // check that req. bouquets is possible according to length of bloomDay
+        if(m*k > bloomDay.length){
+            return -1;
+        }
+        int start = Integer.MAX_VALUE;
+        int end = Integer.MIN_VALUE;
+
+        // find the range
+        for(int i = 0; i < bloomDay.length; i++){
+            start = Math.min(start, bloomDay[i]);
+            end = Math.max(end, bloomDay[i]);
+        }
+        // binary search
+        int ans = -1;
+        while(start <= end){
+            int mid = start + (end - start)/2;
+            // find min. day in left half
+            if(bloom(bloomDay, mid,  m, k)){
+                ans = mid;
+                end = mid-1;
+            }
+            // find in right half
+            else{
+                start = mid+1;
+            }
+        }
+        return ans;
+    }
+}
