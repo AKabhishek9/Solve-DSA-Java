@@ -1,0 +1,91 @@
+// Approach 1 (Brute force) -----------------------------------------------------(Gives TLE)
+class Solution {
+    public boolean split(int nums[], int maxSum, int k){
+        int subArr = 1;
+        int sum = 0;
+        for(int i = 0; i < nums.length; i++){
+            // maintain sum until <= for the current value
+            if(nums[i] + sum <= maxSum){
+                sum += nums[i];
+            }
+            // if sum gets greater then increase subarray count
+            else{
+                subArr++;
+                sum = nums[i];
+            }
+        }
+        // check weather sub array count if greater or less
+        // according to given sub array count
+        if(subArr > k){
+            return false;
+        }
+        return true;
+    }
+
+    public int splitArray(int[] nums, int k) {
+        int start = 0;
+        int end = 0;
+        // find the range
+        for(int i = 0; i < nums.length; i++){
+            start = Math.max(start, nums[i]);
+            end += nums[i];
+        }
+
+        // try all possible values fromt the range
+        for(int i = start; i <= end; i++){
+            if(split(nums, i, k)){
+                return i;
+            }
+        }
+        return -1;
+    }
+}
+
+// Approach 2 ------------------------------------------------------------------------(BEST TC = 0ms)
+class Solution {
+    public boolean split(int nums[], int maxSum, int k){
+        int subArr = 1;
+        int sum = 0;
+        for(int i = 0; i < nums.length; i++){
+            // maintain sum until <= for the current value
+            if(nums[i] + sum <= maxSum){
+                sum += nums[i];
+            }
+            // if sum gets greater then increase subarray count
+            else{
+                subArr++;
+                sum = nums[i];
+            }
+        }
+        // check weather sub array count if greater or less
+        // according to given sub array count
+        if(subArr > k){
+            return false;
+        }
+        return true;
+    }
+
+    public int splitArray(int[] nums, int k) {
+        int start = 0;
+        int end = 0;
+        // find the range
+        for(int i = 0; i < nums.length; i++){
+            start = Math.max(start, nums[i]);
+            end += nums[i];
+        }
+
+        // Binary search
+        int ans = 0;
+        while(start <= end){
+            int mid = start+(end-start)/2;
+            if(split(nums, mid, k)){
+                ans = mid;
+                end = mid-1; // try lesser value
+            }
+            else{
+                start = mid+1; // try greater value
+            }
+        }
+        return ans;
+    }
+}
