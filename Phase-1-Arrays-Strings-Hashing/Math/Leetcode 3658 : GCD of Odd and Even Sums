@@ -1,0 +1,34 @@
+// Approach 1 (Brute Force) --------------------------------------------------(WORST TC = 574ms)
+class Solution {
+    public int gcdOfOddEvenSums(int n) {
+        int sumOdd = 0;
+        int sumEven = 0;
+        int odd = 1;
+        // calculate sum of first odd n sum
+        for(int i = 0; i < n; i++){
+            sumOdd += odd;
+            odd += 2;
+        }
+        int even = 2;
+        // calculate sum of first even n sum
+        for(int i = 0; i < n; i++){
+            sumEven += even;
+            even += 2;
+        }
+
+        // find GCD
+        for(int i = Math.min(sumOdd, sumEven); i>0; i--){
+            if(sumOdd%i == 0 && sumEven%i == 0){
+                return i;
+            }
+        }
+        return 1;
+    }
+}
+
+// Approach 2 ---------------------------------------------------------------------(TC = 1ms)
+class Solution {
+    public int gcdOfOddEvenSums(int n) {
+        return n;
+    }
+}
