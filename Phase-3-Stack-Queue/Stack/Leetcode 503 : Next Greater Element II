@@ -17,3 +17,35 @@ class Solution {
         return ans;
     }
 }
+
+// Approach 2 ---------------------------------------------------------------(BEST TC = 16ms)
+class Solution {
+    public int[] nextGreaterElements(int[] nums) {
+        int n = nums.length;
+        HashMap<Integer, Integer> map = new HashMap<>();
+        Stack<Integer> st = new Stack<>();
+        int ans[] = new int[n];
+
+        // double the array length to handle circular array
+        for(int i = 2*n-1; i >= 0; i--){
+            // if greater element found pop from the stack
+            while(!st.isEmpty() && st.peek() <= nums[i%n]){
+                st.pop();
+            }
+
+            if(i < n){
+                // no greater element found
+                if(st.isEmpty()){
+                    ans[i] = -1;
+                }
+                // greater element found 
+                else{
+                    ans[i] = st.peek();
+                }
+            }
+            // push every element 
+            st.push(nums[i%n]);
+        }
+        return ans;
+    }
+}
