@@ -1,0 +1,52 @@
+class Solution {
+    //  helper function to calculate area
+     public int largestRectangleArea(int[] heights) {
+        int n = heights.length;
+        int left[] = new int[n];
+        int right[] = new int[n];
+        Stack<Integer> st = new Stack<>();
+        Arrays.fill(right, n);
+
+        // to find previous and next smaller element according to each index
+        for(int i = 0; i < n; i++){
+            while(!st.isEmpty() && heights[i] <= heights[st.peek()]){
+                right[st.pop()] = i;
+            }
+            if(st.isEmpty()){
+                left[i] = -1;
+            }
+            else{
+                left[i] = st.peek();
+            }
+            st.push(i);
+        }
+
+        // calculate the area
+        int area = 0;
+        for(int i = 0; i < n; i++){
+            int width = right[i]-left[i]-1;
+            int height = heights[i]*width;
+            area = Math.max(area, height);
+        }
+        return area;
+    }
+
+    public int maximalRectangle(char[][] matrix) {
+        int height[] = new int[matrix[0].length];
+        int maxArea = 0;
+        // traverse in 2D matrix
+        for(int row = 0; row < matrix.length; row++){
+            for(int col = 0; col < matrix[row].length; col++){
+                if((matrix[row][col]-'0') == 0){
+                    height[col] = 0;
+                }
+                else{
+                    height[col] += (matrix[row][col]-'0');
+                }
+            }
+            int area = largestRectangleArea(height);
+            maxArea = Math.max(maxArea, area);
+        }
+        return maxArea;
+    }
+}
