@@ -1,0 +1,50 @@
+// Approach 1 (Brute force) ------------------------------------------(TC = 0ms)
+class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        // traverse 2D array
+        for(int row = 0; row < matrix.length; row++){
+            for(int col = 0; col < matrix[row].length; col++){
+                if(matrix[row][col] == target){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+}
+
+// Approach 2 -----------------------------------------------------(TC = 0ms)
+class Solution {
+    // Binary search helper func.
+    private boolean bs(int arr[], int target){
+        int start = 0;
+        int end = arr.length-1;
+        while(start <= end){
+            int mid = start + (end - start)/2;
+            if(arr[mid] == target){
+                return true;
+            }
+            if(arr[mid] > target){
+                end = mid-1;
+            }
+            else{
+                start = mid+1;;
+            }
+        }
+        return false;
+    }
+    public boolean searchMatrix(int[][] matrix, int target) {
+        // traverse 2D array
+        int start = 0;
+        int end = 0;
+        for(int row = 0; row < matrix.length; row++){
+            // check target is lies in which row
+            if(matrix[row][0] <= target && target <= matrix[row][matrix[0].length-1]){
+                if(bs(matrix[row], target)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+}
