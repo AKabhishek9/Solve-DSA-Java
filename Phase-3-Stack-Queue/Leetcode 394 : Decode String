@@ -1,0 +1,47 @@
+class Solution {
+    public String decodeString(String s) {
+        Stack<Integer> numSt = new Stack<>();
+        Stack<String> strSt = new Stack<>();
+        for(int i = 0; i < s.length(); i++){
+            char ch = s.charAt(i);
+            // push digit to stack where only numbers is store
+            if(Character.isDigit(ch)){
+                int num = 0;
+                while(i < s.length() && s.charAt(i) >= '0' && s.charAt(i) <= '9'){
+                    num = num*10+(s.charAt(i)-'0');
+                    i++;
+                }
+                i--;
+                numSt.push(num);
+            }
+            // push every char. except num & ]
+            else if(ch != ']'){
+                strSt.push(String.valueOf(ch));
+            }
+            else{ // if "]" comes
+                String str = "";
+                // pop until '[' found
+                while(!strSt.peek().equals("[")){
+                    str = strSt.pop()+str;
+                }
+                strSt.pop();
+                // take the num. from stack 
+                int numCnt = numSt.pop();
+                StringBuilder sb =  new StringBuilder("");
+                // check how much time the current str repeats
+                while(numCnt > 0){
+                    sb.append(str);
+                    numCnt--;
+                }
+                // push the repeated string
+                strSt.push(sb.toString());
+            }
+        }
+        // copy final string from stack 
+        StringBuilder sb =  new StringBuilder("");
+        while(strSt.size() > 0){
+            sb.insert(0, strSt.pop());
+        }
+        return sb.toString();
+    }
+}
