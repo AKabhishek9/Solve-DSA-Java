@@ -1,0 +1,29 @@
+class Solution {
+    public int countStudents(int[] students, int[] sandwiches) {
+        Queue<Integer> q = new ArrayDeque<>();
+        // add students into queue
+        for(int i = 0; i < students.length; i++){
+            q.offer(students[i]);
+        }
+        int leaves = 0;
+        int idx = 0;
+        while(!q.isEmpty()){
+            // if matches remove from queue in move to next element
+            if(q.peek() == sandwiches[idx]){
+                q.poll();
+                idx++;
+                leaves = 0;
+            }
+            // rotate queue
+            else{
+                q.offer(q.poll());
+                leaves++;
+            }
+            // condition to stop infinte rotation
+            if(leaves == q.size()){
+                break;
+            }
+        }// return students unable to eat
+        return q.size();
+    }
+}
