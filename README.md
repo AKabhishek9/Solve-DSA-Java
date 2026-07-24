@@ -6,7 +6,7 @@ I have organized all the questions into different phases so it is easy to practi
 
 ## Phase Roadmap
 
-* **Phase 1: Arrays, Strings & Hashing**
+* **Phase 1 - Arrays, Strings & Hashing**
   * Arrays
   * Strings
   * HashMap
@@ -16,30 +16,30 @@ I have organized all the questions into different phases so it is easy to practi
   * Sorting
   * Simulation
 
-* **Phase 2: Two Pointers & Sliding Window**
+* **Phase 2 - Two Pointers & Sliding Window**
   * Two Pointers
   * Sliding Window
   * Binary Search
 
-* **Phase 3: Stack & Queue**
+* **Phase 3 - Stack & Queue**
   * Stack
   * Queue
   * Monotonic Stack
 
-* **Phase 4: Linked Lists & Trees**
+* **Phase 4 - Linked Lists & Trees**
   * Linked List
   * Trees
   * BST
   * Heap
 
-* **Phase 5: Graphs**
+* **Phase 5 - Graphs**
   * Graphs
   * BFS
   * DFS
   * Union Find
   * Topological Sort
 
-* **Phase 6: Dynamic Programming & Advanced Topics**
+* **Phase 6 - Dynamic Programming & Advanced Topics**
   * Dynamic Programming
   * Greedy
   * Backtracking
@@ -49,4 +49,4 @@ I have organized all the questions into different phases so it is easy to practi
   * Advanced
 
 ## Note
-All files are named like `Leetcode [Number] ∶ [Name]` or the original question name so they are easy to find.
+All files are named like `Leetcode [Number] - [Name]` or the original question name so they are easy to find.

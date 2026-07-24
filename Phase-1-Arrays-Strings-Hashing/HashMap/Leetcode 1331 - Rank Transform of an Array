@@ -1,4 +1,4 @@
-// Approach 1 (Brute force) -------------------------> Phase-1-Arrays-Strings-Hashing/Arrays/Leetcode 1331 : Rank Transform of an Array
+// Approach 1 (Brute force) -------------------------> Phase-1-Arrays-Strings-Hashing/Arrays/Leetcode 1331 - Rank Transform of an Array
 
 // Approach 2 ------------------------------------------------(TC = 36ms)
 class Solution {

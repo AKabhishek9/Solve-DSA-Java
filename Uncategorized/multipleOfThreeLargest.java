@@ -22,6 +22,6 @@ class multipleOfThreeLargest {
     public static void main(String[] args) {
         int arr[] = {5, 9, 3, 2, 6, 8, 1};
         int result = find(arr);
-        System.out.println("Third Largest No. : " + result);
+        System.out.println("Third Largest No. - " + result);
     }
 }

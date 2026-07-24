@@ -34,7 +34,7 @@ class Solution {
         for(int i = 0; i < piles.length; i++){
             end = Math.max(end, piles[i]);
         }
-        // Start binary search :
+        // Start binary search -
         while(start <= end){
             int mid = (start+end)/2;
             int time = 0;
