@@ -1,0 +1,27 @@
+// Approach 1 (Brute force) ------------------------------------(TC = 4ms)
+class Solution {
+    public int countCommas(int n) {
+        // if n is less than 1k
+        if(n < 1000){
+            return 0;
+        }
+        int cnt = 0;
+        // count commas in every number
+        for(int i = 1000; i <= n; i++){
+            cnt++;
+        }
+        return cnt;
+    }
+}
+
+// Approach 2 -------------------------------------------------(BEST TC = 1ms)
+class Solution {
+    public int countCommas(int n) {
+        // if n is less than 1k
+        if(n < 1000){
+            return 0;
+        }
+        // every number 1000 to n contains one comma
+        return n-999;
+    }
+}
