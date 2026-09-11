@@ -51,3 +51,29 @@ class Solution {
         return res;
     }
 }
+
+// Approach 2 -------------------------------------------------------------(BEST TC = 1ms)
+class Solution {
+    int res = 0;
+    private int[] dfs(TreeNode root){
+        if(root == null){
+            return new int[]{0, 0};
+        }
+        // go to last node first left than right
+        int left[] = dfs(root.left);
+        int right[] = dfs(root.right);
+        // find sum and cnt for current node 
+        int sum = root.val+left[0]+right[0];
+        int cnt = 1+left[1]+right[1];
+        // check condition match
+        if(root.val == sum/cnt){
+            res++;
+        }
+        // return value in pair to upper node
+        return new int[]{sum, cnt};
+    }
+    public int averageOfSubtree(TreeNode root) {
+        dfs(root);
+        return res;
+    }
+}
