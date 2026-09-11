@@ -1,0 +1,25 @@
+class Solution {
+    public int totalNumbers(int[] digits) {
+        Set<Integer> set = new HashSet();
+        for (int i = 0; i < digits.length; i++){
+            for (int j = 0; j < digits.length; j++){
+                if (j == i){
+                    continue;
+                }
+                for (int k = 0; k < digits.length; k++){
+                    // Do not reuse the same digit index
+                    if (k == j || k == i){
+                        continue;
+                    }
+                    // first digit cannot be zero and last digit must be even
+                    if (digits[i] == 0 || digits[k] % 2 != 0){
+                        continue;
+                    }
+                    // store the number to the set to remove duplicates
+                    set.add( (digits[i] * 100) + (digits[j] * 10) + digits[k]);
+                }
+            }
+        }
+        return set.size();
+    }
+}
