@@ -1,0 +1,73 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+
+// Approach 1 (Using BFS) -----------------------------------------------------(TC = 16ms)
+public class Codec {
+    // Encodes a tree to a single string.
+    public String serialize(TreeNode root) {
+        if(root == null){
+            return "";
+        }
+        Queue<TreeNode> q = new LinkedList<>();
+        StringBuilder st = new StringBuilder();
+        q.add(root);
+
+        while(!q.isEmpty()){
+            TreeNode node = q.poll();
+            // if node is null add mark 
+            if(node == null){
+                st.append("a ");
+                // move to another iteration
+                continue;
+            }
+            // add node value 
+            st.append(node.val + " ");
+            q.add(node.left);
+            q.add(node.right);
+        }
+        return st.toString();
+    }
+
+    // Decodes your encoded data to tree.
+    public TreeNode deserialize(String data) {
+        if(data == ""){
+            return null;
+        }
+        Queue<TreeNode> q = new LinkedList<>();
+        // create array
+        String ch[] = data.split(" ");
+        TreeNode root = new TreeNode(Integer.parseInt(ch[0]));
+        q.add(root);
+        int i = 1;
+        while(!q.isEmpty()){
+            TreeNode node = q.poll();
+            // create left node
+            if(!ch[i].equals("a")){
+                TreeNode leftNode = new TreeNode(Integer.parseInt(ch[i]));
+                node.left = leftNode;
+                q.add(leftNode);
+            }
+            i++;
+            // create right node
+            if(!ch[i].equals("a")){
+                TreeNode rightNode = new TreeNode(Integer.parseInt(ch[i]));
+                node.right = rightNode;
+                q.add(rightNode);
+            }
+            i++;
+        }
+        return root;
+    }
+}
+
+// Your Codec object will be instantiated and called as such:
+// Codec ser = new Codec();
+// Codec deser = new Codec();
+// TreeNode ans = deser.deserialize(ser.serialize(root));
