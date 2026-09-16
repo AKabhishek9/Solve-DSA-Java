@@ -67,6 +67,54 @@ public class Codec {
     }
 }
 
+// Approach 2 (Using DFS) --------------------------------------------------------------(BEST TC = 9ms)
+public class Codec {
+    // Encodes a tree to a single string.
+    StringBuilder st;
+
+    private void dfs(TreeNode root){
+        // if node becomes null mark it
+        if(root == null){
+            st.append("a ");
+            return;
+        }
+        // add char to string builder
+        st.append(root.val + " ");
+        // recursively add char to stringbuilder
+        dfs(root.left);
+        dfs(root.right);
+    }
+    public String serialize(TreeNode root) {
+        st =  new StringBuilder();
+        dfs(root);
+        return st.toString();
+    }
+
+    // Decodes your encoded data to tree.
+    String val[];
+    int idx;
+
+    private TreeNode dfs2(String val[]){
+        // if current value is marked 
+        if(val[idx].equals("a")){
+            idx++;
+            return null;
+        }
+        // use current value to create a node
+        TreeNode node = new TreeNode(Integer.parseInt(val[idx++]));
+        // recursively build left and right node 
+        node.left = dfs2(val);
+        node.right = dfs2(val);
+
+        return node;
+    }
+    public TreeNode deserialize(String data) {
+        idx = 0;
+        val = data.split(" ");
+        return dfs2(val);
+    }
+}
+
 // Your Codec object will be instantiated and called as such:
 // Codec ser = new Codec();
 // Codec deser = new Codec();
