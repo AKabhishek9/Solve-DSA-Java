@@ -35,6 +35,7 @@ I have organized all the questions into different phases so it is easy to practi
 
 * **Phase 5 - Graphs**
   * Graphs
+  * Backtracking
   * BFS
   * DFS
   * Union Find
@@ -43,7 +44,6 @@ I have organized all the questions into different phases so it is easy to practi
 * **Phase 6 - Dynamic Programming & Advanced Topics**
   * Dynamic Programming
   * Greedy
-  * Backtracking
   * Trie
   * Segment Tree
   * Bit Manipulation
