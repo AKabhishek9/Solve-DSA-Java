@@ -1,0 +1,23 @@
+class Solution {
+    List<List<Integer>> ans = new ArrayList<>();
+    private void bt(int arr[], int idx, List<Integer> subList){
+        // add base case
+        if(idx == arr.length){
+            ans.add(new ArrayList<>(subList));
+            return;
+        }
+        // choose
+        subList.add(arr[idx]);
+        bt(arr, idx+1, subList);
+
+        // on backtracking remove last added element
+        subList.remove(subList.size()-1);
+        // not choose
+        bt(arr, idx+1, subList);
+    }
+
+    public List<List<Integer>> subsets(int[] nums) {
+        bt(nums, 0, new ArrayList<>());
+        return ans;
+    }
+}
