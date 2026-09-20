@@ -1,0 +1,24 @@
+class Solution {
+    private void bt(int idx, int arr[], List<Integer> list, List<List<Integer>> ans){
+        // add current subset to main list
+        ans.add(new ArrayList<>(list));
+        for(int i = idx; i < arr.length; i++){
+            // skip duplicates on same level of same size list
+            if(i != idx && arr[i] == arr[i-1]){
+                continue;
+            }
+            // add new element on a level to list
+            list.add(arr[i]);
+            // move to the next index 
+            bt(i+1, arr, list, ans);
+            // remove last element from the list and start backtracking
+            list.remove(list.size()-1);
+        }
+    }
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        Arrays.sort(nums);
+        List<List<Integer>> ans = new ArrayList<>();
+        bt(0, nums, new ArrayList<>(), ans);
+        return ans;
+    }
+}
