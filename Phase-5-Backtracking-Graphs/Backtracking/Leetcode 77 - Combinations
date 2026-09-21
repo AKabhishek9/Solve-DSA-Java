@@ -1,0 +1,29 @@
+class Solution {
+    List<List<Integer>> ans = new ArrayList<>();
+    private void bt(int st, int n, int k, List<Integer> list){
+        if(k == 0){
+            // add current list to main list 
+            ans.add(new ArrayList<>(list));
+            return;
+        }
+
+        if(st > n){
+            return;
+        }
+
+        // choose
+        list.add(st);
+        bt(st+1, n, k-1, list);
+        
+        // during backtracking remove the chosen no. 
+        list.remove(list.size()-1);
+        // don't choose
+        bt(st+1, n, k, list);
+    }
+
+    public List<List<Integer>> combine(int n, int k) {
+        List<Integer> list = new ArrayList<>();
+        bt(1, n, k, list);
+        return ans;
+    }
+}
