@@ -1,0 +1,35 @@
+// Approach 1 ---> Phase-1-Arrays-Strings-Hashing/HashMap/Leetcode 350 - Intersection of Two Arrays II
+
+// Approach 2 --------------------------------------------------------------------(TC = 6ms)
+class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+        int i = 0;
+        int j = 0;
+        List<Integer> list = new ArrayList<>();
+        while(i < nums1.length && j < nums2.length){
+            // check similar elements
+            if(nums1[i] == nums2[j]){
+                list.add(nums1[i]);
+                // move both pointer
+                i++;
+                j++;
+            }
+            // if nums1 element is smaller 
+            else if(nums1[i] < nums2[j]){
+                i++;
+            }
+            // if nums2 element is smaller
+            else{
+                j++;
+            }
+        }
+        // copy list items to return type 
+        int ans[] = new int[list.size()];
+        for(int k = 0; k < list.size(); k++){
+            ans[k] = list.get(k);
+        }
+        return ans;
+    }
+}
