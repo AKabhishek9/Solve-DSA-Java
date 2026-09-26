@@ -1,0 +1,19 @@
+// Approach 1 --------------------------------------------------------(TC = 537ms)
+class Solution {
+    public int singleNumber(int[] nums) {
+        for(int i = 0; i < nums.length; i++){
+            int cnt = 0;
+            for(int  j = 0; j < nums.length; j++){
+                // store the freq. of index i element 
+                if(nums[i] == nums[j]){
+                    cnt++;
+                }
+            }
+            // checks that the element appears only one time  
+            if(cnt == 1){
+                return nums[i];
+            }
+        }
+        return -1;
+    }
+}
