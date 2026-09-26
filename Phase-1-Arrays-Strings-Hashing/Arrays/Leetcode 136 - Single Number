@@ -17,3 +17,5 @@ class Solution {
         return -1;
     }
 }
+
+// Approach 2 --------> Phase-6-Dynamic-Programming/Bit-Manipulation/Leetcode 136 - Single Number
