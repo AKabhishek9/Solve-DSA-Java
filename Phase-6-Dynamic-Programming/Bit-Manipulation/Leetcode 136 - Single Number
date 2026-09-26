@@ -1,0 +1,13 @@
+Approach 1 -----> Phase-1-Arrays-Strings-Hashing/Arrays/Leetcode 136 - Single Number
+
+// Approach 2 ------------------------------------------------(BEST TC = 1ms)
+class Solution {
+    public int singleNumber(int[] nums) {
+        int ans = 0;
+        for(int i = 0; i < nums.length; i++){
+            // cancel out duplicate elements 
+            ans ^= nums[i];
+        }
+        return ans;
+    }
+}
