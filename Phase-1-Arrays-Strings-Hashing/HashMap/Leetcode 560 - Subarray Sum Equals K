@@ -1,0 +1,22 @@
+// Approach 1 -----> Phase-1-Arrays-Strings-Hashing/Arrays/Leetcode 560 - Subarray Sum Equals K
+
+// Approach 2 ---------------------------------------------------(TC = 23ms)
+class Solution {
+    public int subarraySum(int[] nums, int k) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int preFix = 0;
+        int cnt = 0;
+        // empty prefix before starting the array
+        map.put(0, 1);
+        for(int i = 0; i < nums.length; i++){
+            preFix += nums[i];
+            // if a previous prefix gives sum k
+            if(map.containsKey(preFix - k)){
+                cnt += map.get(preFix - k);
+            }
+            // store current prefix sum
+            map.put(preFix, map.getOrDefault(preFix, 0) + 1);
+        }
+        return cnt;
+    }
+}
