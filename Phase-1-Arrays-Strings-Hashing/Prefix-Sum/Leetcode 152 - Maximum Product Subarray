@@ -1,0 +1,27 @@
+// Approach 1 -----> Phase-1-Arrays-Strings-Hashing/Arrays/Leetcode 152 - Maximum Product Subarray
+
+// Approach 2 -----------------------------------------------------------(BEST TC = 1ms)
+class Solution {
+    public int maxProduct(int[] nums) {
+        int prefix = 1;
+        int suffix = 1;
+        int ans = Integer.MIN_VALUE;
+        for(int i = 0; i < nums.length; i++){
+            // if 0 comes in array
+            if(prefix == 0){
+                prefix = 1;
+            }
+            // if 0 comes in array
+            if(suffix == 0){
+                suffix = 1;
+            }
+            // calculate product from lerft to right
+            prefix *= nums[i];
+            // cal. product from right to left
+            suffix *= nums[nums.length-i-1];
+            // store the max. product seen till the current iteration
+            ans = Math.max(ans, Math.max(prefix, suffix));
+        }
+        return ans;
+    }
+}
