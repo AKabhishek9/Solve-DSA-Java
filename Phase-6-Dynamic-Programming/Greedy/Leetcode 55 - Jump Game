@@ -1,0 +1,19 @@
+// Approach 1 ----------------------------------------------------------(TC = 2ms)
+class Solution {
+    public boolean canJump(int[] nums) {
+        int maxLen = 0;
+        for(int i = 0; i < nums.length; i++){
+            // if current index is not reached by value of maxLen
+            if(i > maxLen){
+                return false;
+            }
+            // store the max index at which we can reached till now
+            maxLen = Math.max(maxLen, i+nums[i]);
+            // if you can reach to last index by value of maxLen
+            if(maxLen >= nums.length-1){
+                return true;
+            }
+        }
+        return false;
+    }
+}
