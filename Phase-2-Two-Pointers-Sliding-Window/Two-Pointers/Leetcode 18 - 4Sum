@@ -1,0 +1,54 @@
+// Approach 1 (Brute Force) ---------------------------------------------------------------------(GIVES TLE)
+class Solution {
+    public List<List<Integer>> fourSum(int[] nums, int target) {
+        List<List<Integer>> list = new ArrayList<>();
+        Arrays.sort(nums);
+        
+        for(int i = 0; i < nums.length; i++){
+            for(int j = i+1; j < nums.length; j++){
+                for(int k = j+1; k < nums.length; k++){
+                    for(int l = k+1; l < nums.length; l++){
+                        long sum = nums[i]+nums[j]+nums[k]+nums[l];
+
+                        if(sum == target){
+                            List<Integer> l1 = Arrays.asList(nums[i], nums[j], nums[k], nums[l]);
+                            // skip similar elements which are already added 
+                            if(!list.contains(l1)){
+                                list.add(l1);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return list;
+    }
+}
+
+// Approach 2 ---------------------------------------------------------------------------------(WORST TC = 655ms)
+class Solution {
+    public List<List<Integer>> fourSum(int[] nums, int target) {
+        List<List<Integer>> list = new ArrayList<>();
+        Arrays.sort(nums);
+
+        for(int i = 0; i < nums.length-3; i++){
+            for(int j = i+1; j < nums.length-2; j++){
+                HashSet<Long> set = new HashSet<>();
+                for(int k = j+1; k < nums.length; k++){
+                    long sum = (long)nums[i]+nums[j]+nums[k];
+                    long num4 = (long)target - sum;
+
+                    if(set.contains(num4)){
+                        List<Integer> l1 = Arrays.asList(nums[i], nums[j], nums[k], (int)num4);
+                        // skip duplicate elements
+                        if(!list.contains(l1)){
+                            list.add(l1);
+                        }
+                    }
+                    set.add((long)nums[k]);
+                }
+            }
+        }
+        return list;
+    }
+}
