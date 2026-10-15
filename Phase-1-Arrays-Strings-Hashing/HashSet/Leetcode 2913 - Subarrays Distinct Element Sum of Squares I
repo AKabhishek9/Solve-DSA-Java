@@ -1,0 +1,20 @@
+class Solution {
+    public int sumCounts(List<Integer> nums) {
+        int i = 0;
+        int ans = 0;
+
+        while(i < nums.size()){
+            HashSet<Integer> set = new HashSet<>();
+            int j = i;
+            while(j < nums.size()){
+                set.add(nums.get(j));
+                // square of size of hashset 
+                // stores only distinct element in current window
+                ans += set.size()*set.size();
+                j++;
+            }
+            i++;
+        }
+        return ans;
+    }
+}
