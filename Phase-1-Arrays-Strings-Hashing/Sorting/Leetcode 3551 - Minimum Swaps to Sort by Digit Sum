@@ -1,0 +1,47 @@
+class Solution {
+    int findSum(int num){
+        int sum = 0;
+        while(num > 0){
+            sum += num%10;
+            num /= 10;
+        }
+        return sum;
+    }
+
+    public int minSwaps(int[] nums) {
+        int n = nums.length;
+        Integer[] idx = new Integer[n];
+        for(int i = 0; i < n; i++){
+            idx[i] = i;
+        }
+
+        // sort element by digit sum then by number
+        Arrays.sort(idx, (a, b) -> {
+            int sumA = findSum(nums[a]);
+            int sumB = findSum(nums[b]);
+            if(sumA != sumB){
+                return sumA - sumB;
+            }
+            return nums[a] - nums[b];
+        });
+
+        boolean[] visited = new boolean[n];
+        int swaps = 0;
+        // count number of swaps
+        for(int i = 0; i < n; i++){
+            if(visited[i] || idx[i] == i){
+                continue;
+            }
+
+            int cycleSize = 0;
+            int j = i;
+            while(!visited[j]){
+                visited[j] = true;
+                j = idx[j];
+                cycleSize++;
+            }
+            swaps += cycleSize - 1;
+        }
+        return swaps;
+    }
+}
