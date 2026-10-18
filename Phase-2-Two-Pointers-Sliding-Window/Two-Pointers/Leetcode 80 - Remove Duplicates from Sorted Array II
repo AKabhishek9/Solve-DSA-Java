@@ -1,0 +1,38 @@
+// Approach 1 ------------------------------------------------------------(TC = 1ms)
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        int i = 0;
+        int ans = 0;
+        int j = 0;
+
+        while(j < nums.length){
+            int same = 0;
+            // count freq. similar element 
+            while(j < nums.length && nums[i] == nums[j]){
+                same++;
+                j++;
+            }
+            // if freq. of similar element is 1 add only 1 time else 2 time
+            for(int k = 0; k < Math.min(same, 2); k++){
+                nums[ans++] = nums[i];
+            }
+            i = j;
+        }
+        return ans;
+    }
+}
+
+// Approach 2 -----------------------------------------------------------------(BEST TC = 1ms)
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        int ans = 0;
+        for(int i : nums){
+            // first make sure 2 element are added
+            // than comapre current element with last two added  element
+            if(ans < 2 || i > nums[ans-2]){
+                nums[ans++] = i;
+            }
+        }
+        return ans;
+    }
+}
