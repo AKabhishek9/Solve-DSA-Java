@@ -1,0 +1,50 @@
+// Approach 1 -------------------------------------------------(TC  = 7ms)
+class Solution {
+    public double findMaxAverage(int[] nums, int k) {
+        int i = 0;
+        int j = 0;
+        double cnt = 0;
+        double ans = Double.NEGATIVE_INFINITY;
+        int sum = 0;
+
+        while(j < nums.length){
+            sum += nums[j];
+            // if window gets bigger shrink it 
+            // and minus left pointers element value
+            if(j-i+1 > k){
+                sum -= nums[i];
+                i++;
+            }
+            // store max avg. sum of elements in current window
+            if(j-i+1 == k){
+                cnt = (double)sum/k;
+                ans = Math.max(ans, cnt);
+            }
+            j++;
+        }
+        return ans;
+    }
+}
+
+// Approach 2 ----------------------------------------------------(BEST TC = 3ms)
+class Solution {
+    public double findMaxAverage(int[] nums, int k) {
+        int sum = 0;
+
+        // cal. sum of  first k elements 
+        for(int i = 0; i < k; i++){
+            sum += nums[i];
+        }
+
+        int maxSum = sum;
+        // Slide the window
+        for(int i = k; i < nums.length; i++){
+            sum -= nums[i - k]; // remove value of left pointer element
+            sum += nums[i]; // add new value from right pinter
+            
+            // store max sum of elements in current window
+            maxSum = Math.max(maxSum, sum);
+        }
+        return (double) maxSum / k;
+    }
+}
