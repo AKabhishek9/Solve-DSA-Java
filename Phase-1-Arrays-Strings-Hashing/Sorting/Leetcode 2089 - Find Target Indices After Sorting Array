@@ -1,0 +1,45 @@
+// Approach 1 (Brute Force) -------------------------------------------------------------(TC = 5ms)
+class Solution {
+    public List<Integer> targetIndices(int[] nums, int target) {
+        List<Integer> list = new ArrayList<>();
+        Arrays.sort(nums);
+        for(int i = 0; i < nums.length; i++){
+            // if target element found 
+            if(nums[i] == target){
+                // add index to the list
+                list.add(i);
+            }
+        }
+        return list;
+    }
+}
+
+// Approach 2 ----------------------------------------------------------------------------(BEST TC = 1ms)
+class Solution {
+    public List<Integer> targetIndices(int[] nums, int target) {
+        List<Integer> list = new ArrayList<>();
+        int smallElement = 0;
+        int found = 0;
+
+        for(int i = 0; i < nums.length; i++){
+            if(nums[i] < target){
+                // count all small elements
+                smallElement++;
+            }
+            if(nums[i] == target){
+                // count total target element found
+                found++;
+            }
+        }
+        // if there is no target element found in nums[]
+        if(found == 0){
+            return list;
+        }
+
+        for(int i = 0; i < found; i++){
+            // add indexes after all small elements
+            list.add(smallElement++);
+        }
+        return list;
+    }
+}
