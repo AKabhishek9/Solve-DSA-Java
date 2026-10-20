@@ -1,0 +1,49 @@
+// Approach 1 ------------------------------------------------------------------(TC = 4ms)
+class Solution {
+    public int numOfSubarrays(int[] arr, int k, int threshold) {
+        int i = 0;
+        int j = 0;
+        int sum = 0;
+        int ans = 0;
+
+        while(j < arr.length){
+            sum += arr[j];
+            // shrink the window  
+            if(j-i+1 > k){
+                sum -= arr[i];
+                i++;
+            }
+            // window size is = k
+            if(j-i+1 == k){
+                // check the given cond.
+                if(sum/k >= threshold){
+                    ans++;
+                }
+            }
+            j++;
+        }
+        return ans;
+    }
+}
+
+// Approach 2 ------------------------------------------------------------------(BEST TC = 3ms)
+class Solution {
+    public int numOfSubarrays(int[] arr, int k, int threshold) {
+        int sum = 0;
+        int ans = 0;
+
+        for(int i = 0; i < arr.length; i++){
+            sum += arr[i];
+            // sub. left side element value from sum
+            if(i >= k){
+                sum -= arr[i - k];
+            }
+
+            // check the given condition
+            if(i >= k-1 && sum >= (long)k * threshold){
+                ans++;
+            }
+        }
+        return ans;
+    }
+}
