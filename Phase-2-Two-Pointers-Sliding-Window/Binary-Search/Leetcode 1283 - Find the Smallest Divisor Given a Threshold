@@ -95,3 +95,33 @@ class Solution {
         return ans;
     }
 }
+
+// Approach 4 -------------------------------------------------------------------------(BEST TC = 7ms)
+class Solution {
+    public int smallestDivisor(int[] nums, int threshold) {
+        int i = 1;
+        int j = 0;
+        int ans = 1;
+        for(int k = 0; k < nums.length; k++){
+            j = Math.max(nums[k], j);
+        }
+
+        while(i <= j){
+            int mid = i+(j-i)/2;
+            int sum = 0;
+            for(int k = 0; k < nums.length; k++){
+                sum += (nums[k]+mid-1)/mid;
+            }
+            // check higher value
+            if(sum > threshold){
+                i = mid+1;
+            }
+            // check lower value
+            else{
+                ans = mid;
+                j = mid-1;
+            }
+        }
+        return ans;
+    }
+}
