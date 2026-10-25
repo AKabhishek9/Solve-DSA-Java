@@ -57,3 +57,39 @@ class Solution {
         return ans;
     }
 }
+
+// Approach 3 --------------------------------------------------------------------(BEST TC = 8ms)
+class Solution {
+    // helper func. to check she can eat all 
+    public boolean canEat(int piles[], int mid, int h){
+        long ans = 0;
+        for(int i = 0; i < piles.length; i++){
+            ans += (piles[i] + (long) mid - 1) / mid;
+        }
+        return ans <= h;
+    }
+
+    public int minEatingSpeed(int[] piles, int h) {
+        int maxSpeed = Integer.MIN_VALUE;
+        for(int i = 0; i < piles.length; i++){
+            maxSpeed = Math.max(maxSpeed, piles[i]);
+        }
+
+        int i = 1;
+        int j = maxSpeed;
+        int ans = 0;
+        while(i <= j){
+            int mid = i+(j-i)/2;
+            if(canEat(piles, mid, h)){
+                // check in less hours
+                ans = mid; //store current hours in which she can eat
+                j = mid-1;
+            }
+            else{
+                // check in more hours
+                i = mid+1;
+            }
+        }
+        return ans;
+    }
+}
