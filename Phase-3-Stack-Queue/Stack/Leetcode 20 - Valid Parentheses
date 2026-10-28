@@ -31,3 +31,28 @@ class Solution {
         return false;
     }
 }
+
+// Approach 2 --------------------------------------------------------------------(BEST TC = 3ms)
+class Solution {
+    public boolean isValid(String s) {
+        Stack<Character> ch = new Stack<>();
+        for(int i : s.toCharArray()){
+            if(i == '('){
+                ch.push(')');
+            }
+            else if(i == '{'){
+                ch.push('}');
+            }
+            else if(i == '['){
+                ch.push(']');
+            }
+            else{
+                // false if empty and popped bracket is not matches with i
+                if((ch.isEmpty() || ch.pop() != i)){
+                    return false;
+                }
+            }
+        }
+        return ch.isEmpty();
+    }
+}
