@@ -1,0 +1,22 @@
+class Solution {
+    public List<String> buildArray(int[] target, int n) {
+        List<String> list = new ArrayList<>();
+        int stream = 1;
+        int i = 0;
+        while(stream <= n && i < target.length){
+            // push every element
+            list.add("Push");
+
+            if(stream != target[i]){
+                // pop from the stack
+                list.add("Pop");
+            }
+            else{
+                // move to next val. in array
+                i++;
+            }
+            stream++;
+        }
+        return list;
+    }
+}
