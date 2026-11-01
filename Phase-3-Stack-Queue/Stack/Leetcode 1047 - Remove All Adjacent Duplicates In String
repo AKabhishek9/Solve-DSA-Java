@@ -1,0 +1,21 @@
+class Solution {
+    public String removeDuplicates(String s) {
+        Stack<Character> st = new Stack<>();
+        for(char ch : s.toCharArray()){
+            // is same char pop 
+            if(!st.isEmpty() && st.peek() == ch){
+                st.pop();
+            }
+            // differ from top of stack push it
+            else{
+                st.push(ch);
+            }
+        }
+        StringBuilder sb = new StringBuilder();
+        // make string after popping char from stack
+        while(!st.isEmpty()){
+            sb.append(st.pop());
+        }
+        return sb.reverse().toString();
+    }
+}
