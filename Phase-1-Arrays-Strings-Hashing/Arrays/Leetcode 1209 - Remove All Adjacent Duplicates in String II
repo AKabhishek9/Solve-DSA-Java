@@ -1,0 +1,25 @@
+class Solution {
+    public String removeDuplicates(String s, int k) {
+        char chars[] = s.toCharArray();
+        int count[] = new int[chars.length];
+        int top = -1;
+
+        for(int i = 0; i < chars.length; i++){
+            // add current char to array
+            chars[++top] = chars[i];
+            // if current char. matches to previous 
+            if(top > 0 && chars[top] == chars[top - 1]){
+                count[top] = count[top - 1] + 1;
+            } 
+            // make new group
+            else{
+                count[top] = 1;
+            }
+            // remove the group
+            if(count[top] == k){
+                top -= k;
+            }
+        }
+        return new String(chars, 0, top + 1);
+    }
+}
