@@ -18,7 +18,7 @@ class Solution {
     }
 }
 
-// Approach 2 ---------------------------------------------------------------(BEST TC = 16ms)
+// Approach 2 ---------------------------------------------------------------(TC = 16ms)
 class Solution {
     public int[] nextGreaterElements(int[] nums) {
         int n = nums.length;
@@ -47,5 +47,32 @@ class Solution {
             st.push(nums[i%n]);
         }
         return ans;
+    }
+}
+
+// Approach 3 ----------------------------------------------------------------------(BEST TC = 9ms)
+class Solution {
+    public int[] nextGreaterElements(int[] nums) {
+        Stack<Integer> stack = new Stack<>();
+        int[] result = new int[nums.length];
+
+        for(int i = 0; i < nums.length; i++){
+            // if next greater element found add to array
+            while(!stack.isEmpty() && nums[stack.peek()] < nums[i]){
+                result[stack.pop()] = nums[i];
+            }
+            stack.push(i);
+        }
+        for(int i = 0; i < nums.length; i++){
+            // check greater element  circularly
+            while(!stack.isEmpty() && nums[stack.peek()] < nums[i]){
+                result[stack.pop()] = nums[i];
+            }
+        }
+        // insert -1 to array if no greater element found
+        while(!stack.isEmpty()){
+            result[stack.pop()] = -1;
+        }
+        return result;
     }
 }
