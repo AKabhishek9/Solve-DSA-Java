@@ -1,0 +1,27 @@
+// Approach 1(Brute Force) -------> Phase-1-Arrays-Strings-Hashing/Arrays/Leetcode 456 - 132 Pattern
+
+// Approach 2 -------> Phase-1-Arrays-Strings-Hashing/Arrays/Leetcode 456 - 132 Pattern
+
+// Approach 3 -------------------------------------------------------------(BEST TC = 38ms)
+class Solution {
+    public boolean find132pattern(int[] nums) {
+        Stack<Integer> st = new Stack<>();
+        int n = nums.length;
+        // store val. of nums[i]
+        int num3 = Integer.MIN_VALUE;
+        // check val. of nums[j]
+        for(int i = n-1; i >= 0; i--){
+            // 132 pattern found
+            if(nums[i] < num3){
+                return true;
+            }
+            // if greater element found
+            while(!st.isEmpty() && st.peek() < nums[i]){
+                // assign 2nd largest val.
+                num3 = st.pop();
+            }
+            st.push(nums[i]);
+        }
+        return false;
+    }
+}
