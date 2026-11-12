@@ -1,0 +1,60 @@
+Approach 1 -------------------------------------------------------------------(TC = 1ms)
+class Solution {
+    public int longestMonotonicSubarray(int[] nums) {
+        int cntI = 1;
+        int cntD = 1;
+        int ans = 1;
+        for(int i = 1; i < nums.length; i++){
+            // increasing order
+            if(nums[i] > nums[i-1]){
+                cntI++;
+                cntD = 1;
+            }
+            // Decreasing order
+            else if(nums[i] < nums[i-1]){
+                cntI = 1;
+                cntD++;
+            }
+            // equal found reset both cnt
+            else{
+                cntI = 1;
+                cntD = 1;
+            }
+            // stoe max order founds
+            ans = Math.max(ans, Math.max(cntI, cntD));
+        }
+        return ans;
+    }
+}
+
+// Approach 2 ---------------------------------------------------------------(TC = 1ms)
+class Solution {
+    public int longestMonotonicSubarray(int[] nums) {
+        int cntI = 0;
+        int maxI = 0;
+        int cntD = 0;
+        int maxD = 0;
+        for(int i = 0; i < nums.length-1; i++){
+            // increasing order
+            if(nums[i] < nums[i+1]){
+                cntI++;
+                cntD = 0;
+            }
+            // Decreasing order
+            else if(nums[i] > nums[i+1]){
+                cntI = 0;
+                cntD++;
+            }
+            // equal found reset both cnt
+            else{
+                cntI = 0;
+                cntD = 0;
+            }
+            // stoe max order founds
+            maxI = Math.max(maxI, cntI);
+            maxD = Math.max(maxD, cntD);
+        }
+        // cnt gives adjacent comparisons so add 1 to give elements
+        return Math.max(maxI, maxD)+1;
+    }
+}
