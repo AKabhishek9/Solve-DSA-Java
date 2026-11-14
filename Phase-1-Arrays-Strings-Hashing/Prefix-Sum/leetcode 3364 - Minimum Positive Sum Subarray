@@ -1,0 +1,48 @@
+// Approach 1 ----------------------------------------------------------------(TC = 7ms)
+class Solution {
+    public int minimumSumSubarray(List<Integer> nums, int l, int r) {
+        int ans = Integer.MAX_VALUE;
+        for(int i = 0; i < nums.size(); i++){
+            int sum = 0;
+            for(int j = i; j < nums.size(); j++){
+                sum += nums.get(j);
+                int len = (j-i+1);
+                // check the given condition
+                if(len >= l && len <= r && sum > 0){
+                    // store the min. value
+                    ans = Math.min(ans, sum);
+                }
+            }
+        }
+        // return -1 if sum not found
+        return ans == Integer.MAX_VALUE ? -1 : ans;
+    }
+}
+
+// Approach 2 -----------------------------------------------------------------(BEST TC = 2ms)
+class Solution {
+    public int minimumSumSubarray(List<Integer> nums, int l, int r) {
+        int ans = Integer.MAX_VALUE;
+        int[] prefix = new int[nums.size()+1];
+        // find prefix sum of the list
+        for(int i = 0;i<nums.size();i++){
+            prefix[i+1] = prefix[i] + nums.get(i);
+        }
+
+        for(int i = 0;i<nums.size();i++){
+            // traverse in given range to find all subarrays
+            for(int len = l;len<=r;len++){
+                int j = i+ len;
+                if (j > prefix.length-1){
+                    break;
+                }
+                // Calculate subarray sum using prefix sum
+                int sum = prefix[j] - prefix[i];
+                if(sum>0){
+                    ans = Math.min(ans,sum);
+                }
+            }
+        }
+        return ans == Integer.MAX_VALUE ? -1: ans;
+    }
+}
