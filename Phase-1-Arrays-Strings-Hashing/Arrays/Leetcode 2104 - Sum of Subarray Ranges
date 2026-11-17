@@ -1,0 +1,18 @@
+// Approach 1 (Brute Force) ----------------------------------------(TC = 16ms)
+class Solution {
+    public long subArrayRanges(int[] nums) {
+        long ans = 0;
+        // check every subarrays
+        for(int i = 0; i < nums.length; i++){
+            int small = Integer.MAX_VALUE;
+            int large = Integer.MIN_VALUE;
+            for(int j = i; j < nums.length; j++){
+                small = Math.min(small, nums[j]);
+                large = Math.max(large, nums[j]);
+                // find the sum
+                ans += large - small;
+            }
+        }
+        return ans;
+    }
+}
