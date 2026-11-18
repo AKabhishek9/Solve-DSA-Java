@@ -16,3 +16,36 @@ class Solution {
         return ans;
     }
 }
+
+// Approach 2 ------------------------------------------------------(BEST TC = 5ms)
+class Solution {
+    public long subArrayRanges(int[] nums) {
+        int n = nums.length;
+        long ans = 0;
+        int[] minStack = new int[n + 1];
+        int[] maxStack = new int[n + 1];
+        int minTop = -1;
+        int maxTop = -1;
+        
+        for (int i = 0; i <= n; i++) {
+            // process contributions for subarray minimums
+            while (minTop >= 0 && (i == n || nums[minStack[minTop]] > nums[i])) {
+                int mid = minStack[minTop--];
+                int leftBoundary = (minTop == -1) ? -1 : minStack[minTop];
+                long count = (long) (mid - leftBoundary) * (i - mid);
+                ans -= count * nums[mid];
+            }
+            minStack[++minTop] = i;
+            
+            // process contributions for subarray maximums
+            while (maxTop >= 0 && (i == n || nums[maxStack[maxTop]] < nums[i])) {
+                int mid = maxStack[maxTop--];
+                int leftBoundary = (maxTop == -1) ? -1 : maxStack[maxTop];
+                long count = (long) (mid - leftBoundary) * (i - mid);
+                ans += count * nums[mid];
+            }
+            maxStack[++maxTop] = i;
+        }
+        return ans;
+    }
+}
